@@ -50,9 +50,9 @@ Stay tuned for:
 
 hello.fc
 
-```fcl
-// Your first FCL program
-print("Hello from FuseCore!");
+```fc
++ Your first FCL program
+out "Hello World!"
 ```
 
 Run it with:
@@ -61,6 +61,10 @@ Run it with:
 fcl hello.fc
 ```
 
+Result:
+```bash
+Hello World! 
+```
 ---
 
 🗓️ Roadmap
@@ -82,6 +86,6 @@ Watch this repo for updates.
 
 📄 License
 
-MIT (to be finalized)
+MIT
 
 ---

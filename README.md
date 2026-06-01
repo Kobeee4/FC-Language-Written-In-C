@@ -2,7 +2,7 @@
 # THINGS CAN UPDATE SO THE WORDS WILL BE INACCURATE ONCE I RELEASE IT
 > **Status:** 🚧 Coming Soon
 
-FCL (FuseCore Language) is a new coding language designed for performance, simplicity, and seamless system integration. Built for modern development workflows, FCL aims to bridge the gap between low-level control and high-level expressiveness.
+FCL (FuseCore Language) is a new open source coding language designed for performance, simplicity, and seamless system integration. Built for modern development workflows, FCL aims to bridge the gap between low-level control and high-level expressiveness.
 
 ---
 

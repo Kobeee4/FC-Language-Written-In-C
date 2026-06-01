@@ -29,7 +29,7 @@ fcl filename.fc
 
 · Clean, minimal syntax
 · Fast compilation and execution
-· Interoperability with C/Rust backends
+· Interoperability with C backends
 · Built-in safety checks
 · Cross-platform support
 

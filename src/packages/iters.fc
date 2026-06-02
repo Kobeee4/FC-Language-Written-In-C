@@ -1,0 +1,104 @@
+func window(items, size)
+    let res = []
+    let i = 0
+    while i + size <= items.length()
+        res.append(items.slice(i, i + size))
+        i += 1
+    return res
+
+func combinations(items, k)
+    if k == 0
+        return [[]]
+    if items.length() < k
+        return []
+    let res = []
+    let n = items.length()
+    let i = 0
+    while i <= n - k
+        let head = items[i]
+        let rest = items.slice(i + 1, n)
+        let subs = combinations(rest, k - 1)
+        for sub in subs
+            res.append([head] + sub)
+        i += 1
+    return res
+
+func permutations(items)
+    if items.length() <= 1
+        return [items]
+    let res = []
+    let n = items.length()
+    let i = 0
+    while i < n
+        let rest = items.slice(0, i) + items.slice(i + 1, n)
+        let subs = permutations(rest)
+        for sub in subs
+            res.append([items[i]] + sub)
+        i += 1
+    return res
+
+func product2(a, b)
+    let res = []
+    for x in a
+        for y in b
+            res.append([x, y])
+    return res
+
+func accumulate(items)
+    let res = []
+    let total = 0
+    for x in items
+        total += x
+        res.append(total)
+    return res
+
+func accumulate_with(fn, items, init)
+    let res = []
+    let acc = init
+    for x in items
+        acc = fn(acc, x)
+        res.append(acc)
+    return res
+
+func count_by(fn, items)
+    let counts = {}
+    for x in items
+        let k = str(fn(x))
+        if k in counts
+            counts[k] = counts[k] + 1
+        else
+            counts[k] = 1
+    return counts
+
+func interleave(a, b)
+    let res = []
+    let n = a.length()
+    if b.length() > n
+        n = b.length()
+    let i = 0
+    while i < n
+        if i < a.length()
+            res.append(a[i])
+        if i < b.length()
+            res.append(b[i])
+        i += 1
+    return res
+
+func dedupe(items)
+    let seen = []
+    let res = []
+    for x in items
+        if not seen.contains(x)
+            seen.append(x)
+            res.append(x)
+    return res
+
+func flatten_deep(items)
+    let res = []
+    for x in items
+        if type(x) == "list"
+            for y in flatten_deep(x)
+                res.append(y)
+        else
+            res.append(x)
+    return res

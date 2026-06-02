@@ -2,7 +2,7 @@
 
 A small, work in progress programming language implementation written in C. This repository contains the source for FCL, a personal project to explore language design, parsing, and runtime behavior. I build and maintain this project as a solo developer.
 
-Author: Kobeee4 (solo developer)
+Author: Kobeee4 (solo mobile developer)
 
 ## Overview
 

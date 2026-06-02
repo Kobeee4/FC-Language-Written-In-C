@@ -1,0 +1,47 @@
++ datastruct.fc - Stack, Queue, and Set data structures as FC classes
++ import datastruct
+
+class Stack
+    func init()
+        let this.items = []
+    func push(x)
+        this.items.append(x)
+    func pop()
+        return this.items.pop()
+    func peek()
+        return this.items[this.items.length() - 1]
+    func size()
+        return this.items.length()
+    func is_empty()
+        return this.items.length() == 0
+
+class Queue
+    func init()
+        let this.items = []
+    func enqueue(x)
+        this.items.append(x)
+    func dequeue()
+        let front = this.items[0]
+        this.items = this.items.slice(1, this.items.length())
+        return front
+    func size()
+        return this.items.length()
+    func is_empty()
+        return this.items.length() == 0
+
+class Set
+    func init()
+        let this.items = []
+    func add(x)
+        if not this.items.contains(x)
+            this.items.append(x)
+    func has(x)
+        return this.items.contains(x)
+    func remove(x)
+        let idx = this.items.index_of(x)
+        if idx >= 0
+            this.items.remove_at(idx)
+    func size()
+        return this.items.length()
+    func values()
+        return this.items

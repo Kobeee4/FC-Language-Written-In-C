@@ -119,5 +119,3 @@ License
 This project is licensed under the MIT License. See LICENSE for details.
 
 Thank you
-
-If anything in this README still looks off, tell me what to fix and I will update it. I know you are tired; I can keep making small fixes, add more examples, or wire tests so you do not have to push changes yourself. Rest up and I will take care of the little stuff if you want.

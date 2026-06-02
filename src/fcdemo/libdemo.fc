@@ -1,0 +1,44 @@
+import collections
+import strings
+import datastruct
+import testing
+
+out "=== collections ==="
+out "unique:   " + unique([1, 2, 2, 3, 3, 3, 1])
+out "flatten:  " + flatten([[1, 2], [3], [4, 5]])
+out "chunk:    " + chunk([1, 2, 3, 4, 5], 2)
+out "freqs:    " + frequencies(["a", "b", "a", "c", "a"])
+out "zip_with: " + zip_with([1, 2, 3], [10, 20, 30], lambda a, b: a + b)
+
+out ""
+out "=== strings ==="
+out "pad_left:   [" + pad_left("7", 4, "0") + "]"
+out "capitalize: " + capitalize("hello")
+out "snake_case: " + snake_case("Hello World Foo")
+out "camel_case: " + camel_case("hello world foo")
+out "palindrome: " + is_palindrome("race car")
+out "truncate:   " + truncate("a very long sentence", 12)
+
+out ""
+out "=== datastruct ==="
+let s = Stack()
+s.push(1)
+s.push(2)
+s.push(3)
+out "stack pop:  " + s.pop() + " then size " + s.size()
+let q = Queue()
+q.enqueue("a")
+q.enqueue("b")
+out "queue deq:  " + q.dequeue() + " then size " + q.size()
+let set = Set()
+set.add(5)
+set.add(5)
+set.add(9)
+out "set values: " + set.values() + " has 9: " + set.has(9)
+
+out ""
+out "=== testing framework ==="
+check_eq("math works", 2 + 2, 4)
+check("comparison", 10 > 3)
+check_eq("string concat", "a" + "b", "ab")
+test_summary()

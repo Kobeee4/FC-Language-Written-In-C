@@ -1,0 +1,10 @@
++ stats_demo.fc - uses the C-written `stats` module
+let data = [4, 8, 15, 16, 23, 42]
+out "data     = " + data
+out "sum      = " + stats.sum(data)
+out "mean     = " + stats.mean(data)
+out "min/max  = " + stats.min(data) + " / " + stats.max(data)
+out "median   = " + stats.median(data)
+out "variance = " + stats.variance(data)
+out "stdev    = " + stats.stdev(data)
+out "describe = " + stats.describe(data)

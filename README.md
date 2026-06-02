@@ -1,91 +1,81 @@
-# FCL - FuseCore Language
-**THINGS CAN UPDATE SO THE WORDS WILL BE INACCURATE ONCE I RELEASE IT**
-> **Status:** 🚧 Coming Soon
+# FCL (FuseCore Language) - written in C
 
-FCL (FuseCore Language) is a new open source coding language designed for performance, simplicity, and seamless system integration. Built for modern development workflows, FCL aims to bridge the gap between low-level control and high-level expressiveness.
+A small, work in progress programming language implementation written in C. This repository contains the source for FCL, a personal project to explore language design, parsing, and runtime behavior. I build and maintain this project as a solo developer.
 
----
+Author: Kobeee4 (solo developer)
 
-## 📁 File Format
+## Overview
 
-| Extension | Description |
-|-----------|-------------|
-| `.fc`     | FuseCore Language source file |
+FCL is an experimental language project. The goals are simple:
+- learn and practice writing a language implementation in C
+- explore parsing, AST design, and runtime evaluation
+- keep the code readable and easy to experiment with
 
----
+This is not production ready. It is a learning project and a codebase you can read, run, and extend.
 
-## 🚀 Usage
+## Current status
 
-Once installed, FCL can be invoked via the `fcl` command:
+- Early prototype
+- Core parts implemented in C
+- Active work inside the `src` folder
+- No stable release yet
 
-```bash
-# Run an FCL source file
-fcl filename.fc
-```
+## Features and goals
 
----
+These are things I am working on or planning:
+- a simple lexer and parser
+- a compact AST representation
+- an interpreter or a minimal code emitter
+- clear C code so other developers can follow along
 
-✨ Features (Planned)
+If you find missing parts or want to try improvements, contributions are welcome.
 
-· Clean, minimal syntax
-· Fast compilation and execution
-· Interoperability with C backends
-· Built-in safety checks
-· Cross-platform support
+## Prerequisites
 
----
+- A C compiler such as gcc or clang
+- make
+- A Unix like shell is recommended for the build steps
 
-📦 Installation
+## Build
 
-Installation instructions will be provided upon release.
-Stay tuned for:
+From the project root:
 
-· Package managers (Homebrew, APT, Scoop)
-· Pre-built binaries
-· Docker images
+1. Open a terminal
+2. Run:
 
----
+   ```
+   make
+   ```
 
-🧪 Example
+3. If the Makefile produces an executable, run it from the project root or the `bin` folder as directed by the build output.
 
-hello.fc
+If the build fails, check that you have a working C toolchain and that your PATH includes gcc or clang.
 
-```fc
-+ Your first FCL program
-out "Hello World!"
-```
+## Usage
 
-Run it with:
+Usage depends on the current build output. Typical steps:
 
-```bash
-fcl hello.fc
-```
+- Build with `make`
+- Run the produced executable with the appropriate arguments
+- Look in the `src` folder for example code or the main entry point
 
-Result:
-```bash
-Hello World! 
-```
----
+If you want, I can add a concrete example and a sample FCL program once you tell me how you prefer to run it.
 
-🗓️ Roadmap
+## How to help
 
-· Alpha release
-· Language specification document
-· VS Code extension
-· Package manager
-· v1.0 stable release
+I am a solo maintainer. If you want to help:
+- Open issues for bugs or feature ideas
+- Send pull requests for small, focused changes
+- Keep changes small and document behavior in comments or the README
 
----
+I will review contributions when I can. Response time may vary because I am the only maintainer.
 
-🤝 Contributing
+## License
 
-Contributions, ideas, and feedback are welcome once the language enters public preview.
-Watch this repo for updates.
+This project is licensed under the MIT License. See `LICENSE` for details.
 
----
+## Contact
 
-📄 License
+- GitHub: https://github.com/Kobeee4
 
-MIT
-
----
+Thanks for checking out FCL. If you want more examples or a short tutorial, tell me how you want to run programs and I will add one.

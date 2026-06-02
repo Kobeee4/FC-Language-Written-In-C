@@ -1,3 +1,12 @@
+<p align="center">
+  <img src="images/fc_logo.png" width="220">
+</p>
+
+<h1 align="center">FC Language</h1>
+
+<p align="center">
+Experimental programming language written in C with neural network support.
+</p>
 # FCL (FuseCore Language) - written in C
 
 A small but real programming language implementation written in C. This repository contains a working lexer, parser, interpreter, and a set of native modules, including AI and neural-network helpers. The project is maintained solo by the author, who develops primarily from a mobile device.

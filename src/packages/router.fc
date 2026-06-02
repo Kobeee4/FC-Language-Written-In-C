@@ -1,0 +1,26 @@
+class Router
+    func init()
+        let this.routes = []
+        let this.fallback = null
+    func add(method, path, handler)
+        this.routes.append({"method": method, "path": path, "handler": handler})
+    func get(path, handler)
+        this.add("GET", path, handler)
+    func post(path, handler)
+        this.add("POST", path, handler)
+    func set_fallback(handler)
+        this.fallback = handler
+    func dispatch(req)
+        let method = req["method"]
+        let path = req["path"]
+        let i = 0
+        while i < this.routes.length()
+            let route = this.routes[i]
+            if route["method"] == method and route["path"] == path
+                let handler = route["handler"]
+                return handler(req)
+            i += 1
+        if not (this.fallback == null)
+            let fb = this.fallback
+            return fb(req)
+        return {"status": 404, "body": "404 Not Found"}

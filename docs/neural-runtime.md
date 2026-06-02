@@ -4,6 +4,7 @@ FCL includes helpers for matrix arithmetic and neural-network utilities. These f
 
 ### Note:
 You can write a custom module/package with proper AI stuff. 
+
 Provided modules
 
 - ai: matrix and numeric helpers

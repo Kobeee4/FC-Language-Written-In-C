@@ -40,7 +40,7 @@ Limitations
 - These helpers are simple and not optimized for large-scale numerical workloads.
 - For performance-sensitive tasks, linking to an optimized native backend (BLAS) or providing an FFI is recommended.
 
-Possible Improvements (further updates, from me) 
+Possible Improvements
 
 - Add matrix operation optimizations or an optional native backend
 - Introduce batched operations and basic training loops

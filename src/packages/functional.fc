@@ -1,0 +1,166 @@
+func identity(x)
+    return x
+
+func mapl(fn, items)
+    let res = []
+    for x in items
+        res.append(fn(x))
+    return res
+
+func filterl(fn, items)
+    let res = []
+    for x in items
+        if fn(x)
+            res.append(x)
+    return res
+
+func reducel(fn, items, acc)
+    let a = acc
+    for x in items
+        a = fn(a, x)
+    return a
+
+func find_first(fn, items)
+    for x in items
+        if fn(x)
+            return x
+    return null
+
+func all_of(fn, items)
+    for x in items
+        if not fn(x)
+            return false
+    return true
+
+func any_of(fn, items)
+    for x in items
+        if fn(x)
+            return true
+    return false
+
+func none_of(fn, items)
+    return not any_of(fn, items)
+
+func count_if(fn, items)
+    let n = 0
+    for x in items
+        if fn(x)
+            n += 1
+    return n
+
+func take(items, n)
+    let res = []
+    let i = 0
+    while i < n and i < items.length()
+        res.append(items[i])
+        i += 1
+    return res
+
+func drop(items, n)
+    let res = []
+    let i = n
+    while i < items.length()
+        res.append(items[i])
+        i += 1
+    return res
+
+func take_while(fn, items)
+    let res = []
+    for x in items
+        if not fn(x)
+            break
+        res.append(x)
+    return res
+
+func drop_while(fn, items)
+    let res = []
+    let dropping = true
+    for x in items
+        if dropping and fn(x)
+            continue
+        dropping = false
+        res.append(x)
+    return res
+
+func repeat_value(x, n)
+    let res = []
+    let i = 0
+    while i < n
+        res.append(x)
+        i += 1
+    return res
+
+func times_list(n, fn)
+    let res = []
+    let i = 0
+    while i < n
+        res.append(fn(i))
+        i += 1
+    return res
+
+func flat_map(fn, items)
+    let res = []
+    for x in items
+        for y in fn(x)
+            res.append(y)
+    return res
+
+func sum_by(fn, items)
+    let total = 0
+    for x in items
+        total += fn(x)
+    return total
+
+func max_by(fn, items)
+    if items.length() == 0
+        return null
+    let best = items[0]
+    let best_key = fn(best)
+    for x in items
+        let k = fn(x)
+        if k > best_key
+            best = x
+            best_key = k
+    return best
+
+func min_by(fn, items)
+    if items.length() == 0
+        return null
+    let best = items[0]
+    let best_key = fn(best)
+    for x in items
+        let k = fn(x)
+        if k < best_key
+            best = x
+            best_key = k
+    return best
+
+func partition(fn, items)
+    let yes = []
+    let no = []
+    for x in items
+        if fn(x)
+            yes.append(x)
+        else
+            no.append(x)
+    return [yes, no]
+
+func pipe(x, fns)
+    let acc = x
+    for f in fns
+        acc = f(acc)
+    return acc
+
+class Memo
+    func init(fn)
+        let this.fn = fn
+        let this.cache = {}
+    func get(x)
+        let key = str(x)
+        if key in this.cache
+            return this.cache[key]
+        let v = this.fn(x)
+        this.cache[key] = v
+        return v
+    func size()
+        return this.cache.length()

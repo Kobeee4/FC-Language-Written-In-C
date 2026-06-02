@@ -1,0 +1,67 @@
++ collections.fc - list/dict helpers FC doesn't have built in
++ import collections
+
+func unique(items)
+    let seen = []
+    let result = []
+    for x in items
+        if not seen.contains(x)
+            seen.append(x)
+            result.append(x)
+    return result
+
+func flatten(nested)
+    let result = []
+    for sub in nested
+        for x in sub
+            result.append(x)
+    return result
+
+func chunk(items, size)
+    let result = []
+    let cur = []
+    for x in items
+        cur.append(x)
+        if cur.length() == size
+            result.append(cur)
+            cur = []
+    if cur.length() > 0
+        result.append(cur)
+    return result
+
+func frequencies(items)
+    let counts = {}
+    for x in items
+        let key = str(x)
+        if key in counts
+            counts[key] = counts[key] + 1
+        else
+            counts[key] = 1
+    return counts
+
+func group_by(items, keyfn)
+    let groups = {}
+    for x in items
+        let k = str(keyfn(x))
+        if not (k in groups)
+            groups[k] = []
+        groups[k].append(x)
+    return groups
+
+func zip_with(a, b, fn)
+    let result = []
+    let n = a.length()
+    if b.length() < n
+        n = b.length()
+    let i = 0
+    while i < n
+        result.append(fn(a[i], b[i]))
+        i += 1
+    return result
+
+func count_where(items, predicate)
+    let n = 0
+    for x in items
+        if predicate(x)
+            n += 1
+    return n

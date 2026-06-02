@@ -1,0 +1,95 @@
++ math.fc - test suite for FC math, AI/neural, security, web, file modules
+
+out "===== MATH MODULE ====="
+out "pi      = " + math.pi
+out "e       = " + math.e
+out "tau     = " + math.tau
+out "sqrt 144= " + math.sqrt(144)
+out "pow 2^10= " + math.pow(2, 10)
+out "abs -5  = " + math.abs(0 - 5)
+out "floor   = " + math.floor(3.9)
+out "ceil    = " + math.ceil(3.1)
+out "round   = " + math.round(2.5)
+out "log e   = " + math.log(math.e)
+out "log10   = " + math.log10(1000)
+out "exp 0   = " + math.exp(0)
+out "min/max = " + math.min(7, 3) + " / " + math.max(7, 3)
+out "hypot   = " + math.hypot(3, 4)
+
+out ""
+out "===== GLOBAL HELPERS ====="
+out "range   = " + range(1, 6)
+out "max     = " + max([3, 9, 1]) + " is max"
+func square(x)
+    return x * x
+out "squares = " + fn.map(square, range(1, 6))
+
+out ""
+out "===== AI / MATRIX ====="
+let a = [[1, 2], [3, 4]]
+let b = [[5, 6], [7, 8]]
+out "A.B     = " + ai.dot(a, b)
+out "A+B     = " + ai.add(a, b)
+out "A^T     = " + ai.transpose(a)
+out "shape   = " + ai.shape(a)
+let model = ai.train_linear([1, 2, 3, 4], [3, 5, 7, 9])
+out "fit y=2x+1 -> m=" + model["m"] + " b=" + model["b"]
+out "predict 10 = " + ai.predict(model, 10)
+
+out ""
+out "===== NEURAL NET ACTIVATIONS ====="
+out "sigmoid 0   = " + nn.sigmoid(0)
+out "relu list   = " + nn.relu([0 - 2, 0 - 1, 0, 1, 2])
+out "softmax     = " + nn.softmax([1, 2, 3])
+out "tanh 0      = " + nn.tanh(0)
+
+out ""
+out "===== TINY NEURAL FORWARD PASS ====="
++ 1 input -> 2 hidden (sigmoid) -> 1 output
+let inp = [[0.5]]
+let w1 = [[0.1, 0.2]]
+let hidden = ai.apply(nn.sigmoid, ai.dot(inp, w1))
+let w2 = [[0.7], [0.3]]
+let output = ai.apply(nn.sigmoid, ai.dot(hidden, w2))
+out "network output = " + output
+
+out ""
+out "===== CYBERSECURITY ====="
+out "sha256 hi   = " + crypto.hash("sha256", "hi")
+out "base64      = " + crypto.base64_encode("FC rocks")
+out "rot13       = " + sec.rot13("Hello")
+out "rot13 back  = " + sec.rot13(sec.rot13("Hello"))
+let secret = sec.xor("attack at dawn", "key")
+out "xor->hex    = " + sec.hex_encode(secret)
+out "xor decrypt = " + sec.xor(secret, "key")
+out "crc32       = " + sec.crc32("123456789")
+out "pw strength = " + sec.strength("P@ssw0rd123")
+
+out ""
+out "===== WEB HELPERS ====="
+out "url encode  = " + web.url_encode("a b&c=d")
+out "url decode  = " + web.url_decode("a%20b%26c")
+out "html escape = " + web.html_escape("<b>hi</b>")
+
+out ""
+out "===== FILE / MODDING ====="
+file.write("fc_demo.txt", "line one\nline two\nline three")
+out "exists      = " + file.exists("fc_demo.txt")
+out "size        = " + file.size("fc_demo.txt")
+out "lines       = " + file.lines("fc_demo.txt")
+file.write_bytes("fc_demo.bin", [70, 67, 33])
+out "bytes back  = " + file.read_bytes("fc_demo.bin")
+file.delete("fc_demo.bin")
+file.delete("fc_demo.txt")
+
+out ""
+out "===== CONTROL FLOW ====="
+let total = 0
+for n in range(1, 11)
+    if n % 2 == 0
+        continue
+    total = total + n
+out "sum of odds 1..10 = " + total
+
+out ""
+out "All tests passed."

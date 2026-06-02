@@ -63,7 +63,7 @@ static int needs_more(const char* line) {
 static int repl(void) {
     Interp* I = interp_new();
     register_modules(I);
-    printf("FC Language REPL. Type code; a blank line runs a buffered block. Ctrl-D to exit.\n");
+    printf("FC Language REPL. Made By Kobeee4 In GitHub. Type code; a blank line runs a buffered block. Ctrl-D to exit.\n");
 
     Node** progs = NULL;
     int prog_count = 0, prog_cap = 0;

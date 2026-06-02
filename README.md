@@ -1,99 +1,123 @@
 # FCL (FuseCore Language) - written in C
 
-A small, work in progress programming language implementation written in C. This repository contains the source for FCL, a personal project to explore language design, parsing, and runtime behavior. I build and maintain this project as a solo developer.
-I'm sorry if any errors or bugs, I'm only using a Phone To make this. 
+A small but real programming language implementation written in C. This repo contains a working lexer, parser, interpreter, and a set of native modules (including AI and neural-network helpers). I maintain this project solo from my phone as a mobile developer.
+
 Author: Kobeee4 (solo mobile developer)
 
-## Overview
+Overview
 
-FCL is an experimental language project. The goals are simple:
-- learn and practice writing a language implementation in C
-- explore parsing, AST design, and runtime evaluation
-- keep the code readable and easy to experiment with
+FCL (FuseCore Language) is an experimental, lightweight language implemented in C. It is intended for learning, experimentation, and quick demos. The project already contains the main pieces of a working interpreter: a lexer, a parser, an AST, a runtime/interpreter, and many native modules exposed to scripts.
 
-This is not production ready. It is a learning project and a codebase you can read, run, and extend.
+What is in the repo (high level)
 
-## Current status
+- Working lexer: src/lexer.c, src/lexer.h
+- Working parser: src/parser.c, src/parser.h
+- Interpreter and runtime: src/interpreter.c, src/main.c
+- Native modules and bindings: src/modules.c (includes ai and nn modules for matrix ops and neural helpers)
+- Demos and scripts: src/fcdemo (math.ai demo), src/update (small example and a stub runtime I added for quick checks)
+- Two Makefiles:
+  - top-level Makefile I added to produce bin/fcl for an easy demo build
+  - src/Makefile which builds the original "fc" interpreter (used by the original project structure)
 
-- Early prototype
-- Core parts implemented in C
-- Active work inside the `src` folder
-- No stable release yet
+Notable built-in modules
 
-## Features and goals
+- ai: matrix, dot, add, transpose, train_linear, predict, randn, shape, apply
+- nn: sigmoid, relu, tanh, softmax, and derivative helpers
+- math, crypto, sec (security), web, file, random, os, and more
 
-These are things I am working on or planning:
-- a simple lexer and parser
-- a compact AST representation
-- an interpreter or a minimal code emitter
-- clear C code so other developers can follow along
+There are demo scripts showing AI and tiny neural forward passes in src/fcdemo/math.fc
 
-If you find missing parts or want to try improvements, contributions are welcome.
+Build options
 
-## Prerequisites
+You can build the project in two ways depending on what you want to run.
 
-- A C compiler such as gcc or clang
-- make
-- A Unix like shell is recommended for the build steps
+1) Use the top-level Makefile (easy demo build, produces bin/fcl)
 
-## Build
+   From the repository root:
 
-From the project root:
-
-1. Open a terminal
-2. Run:
-
-   ```
+   ```sh
    make
    ```
 
-3. If the Makefile produces an executable, run it from the project root or the `bin` folder as directed by the build output.
+   The top-level Makefile compiles C sources (from src) into object files and links an executable at ./bin/fcl.
 
-If the build fails, check that you have a working C toolchain and that your PATH includes gcc or clang.
+2) Use the original src/Makefile (the classic fc build)
 
-## Usage
-
-Usage depends on the current build output. Typical steps:
-
-- Build with `make`
-- Run the produced executable with the appropriate arguments
-- Look in the `src` folder for example code or the main entry point
-
-If you want, I can add a concrete example and a sample FCL program once you tell me how you prefer to run it.
-
-### Quick example (added)
-
-This repository now includes a small example runtime stub and a sample program in `src/update` so you can build and try the project immediately.
-
-1. Build the project:
-
-   ```
+   ```sh
+   cd src
    make
    ```
 
-2. Run the example program:
+   This produces the `fc` binary in the src directory (the old project layout). You can also build with:
 
+   ```sh
+   cc -O2 -std=gnu11 -o fc main.c lexer.c parser.c interpreter.c modules.c others.c -lm
    ```
-   ./bin/fcl src/update/example.fc
-   ```
 
-   The runtime is a minimal stub that prints the contents of the file and simulates execution. This is meant to be a low-friction way to verify the build and iterate on language features.
+Running programs
 
-## How to help
+- Run the full interpreter (recommended for demos and real scripts):
 
-I am a solo maintainer. If you want to help:
-- Open issues for bugs or feature ideas
-- Send pull requests for small, focused changes
-- Keep changes small and document behavior in comments or the README
+  - If you used the top-level Makefile:
 
-I will review contributions when I can. Response time may vary because I am the only maintainer.
+    ```sh
+    ./bin/fcl path/to/script.fc
+    ```
 
-## License
+  - If you built with src/Makefile inside src/:
 
-This project is licensed under the MIT License. See `LICENSE` for details.
+    ```sh
+    ./fc path/to/script.fc
+    ```
 
-## Contact
+- Demos:
 
-- GitHub: https://github.com/Kobeee4
+  - AI + NN demo (matrix ops and tiny neural forward pass):
 
-Thanks for checking out FCL. If you want more examples or a short tutorial, tell me how you want to run programs and I will add one.
+    ```sh
+    ./bin/fcl src/fcdemo/math.fc
+    ```
+
+  - Quick example I added (a small stub runtime that prints the file):
+
+    ```sh
+    ./bin/fcl src/update/example.fc
+    ```
+
+Notes about the stub in src/update
+
+I added a minimal stub runtime in src/update/main.c to make a very low-friction smoke test and an example file at src/update/example.fc. The real interpreter in src/main.c is the full runtime and already supports the ai and nn modules; use that for real testing and demos.
+
+Mobile/Termux notes
+
+You mentioned you work from a phone. Good news: the project includes notes and has been developed with Termux in mind. See src/README.txt for detailed Termux instructions. Quick summary:
+
+- Install Termux (F-Droid recommended) and packages: clang, make
+- Build inside Termux's $HOME (do not build on /sdcard because of noexec)
+- Example Termux commands:
+
+  ```sh
+  pkg update && pkg upgrade
+  pkg install clang make
+  cd ~/path/to/FC-Language-Written-In-C/src
+  make
+  ./fc src/fcdemo/math.fc
+  ```
+
+How to help or contribute
+
+I maintain this solo from my phone, so small changes are best. If you want to contribute:
+
+- Open small, focused pull requests
+- Add examples or small modules (follow Module guide in src/Module guide.txt)
+- File issues for bugs or feature requests
+
+If you want, I can add CONTRIBUTING and ISSUE templates to make this easier for you and others.
+
+License
+
+This project is licensed under the MIT License. See LICENSE for details.
+
+Thank you
+
+If anything in this README still looks off, tell me what to fix and I will update it. I know you are tired; I can keep making small fixes, add more examples, or wire tests so you do not have to push changes yourself. Rest up and I will take care of the little stuff if you want.

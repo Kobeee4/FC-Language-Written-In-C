@@ -1,10 +1,10 @@
 # Minimal stub runtime for FCL
 
-This file contains a minimal C runtime that builds into `bin/fcl`. It is intentionally small and self-contained so you can build and try the repository without wiring the full interpreter yet.
+This folder contains a minimal C runtime that builds into `bin/fcl` when using the top-level Makefile.
 
-To build and run:
+To build and run the stub example:
 
   make
   ./bin/fcl src/update/example.fc
 
-The runtime prints a header, reads the file passed as the first argument, and prints its contents as a simulated execution output.
+The stub runtime prints a header, reads the source file passed as the first argument, and prints its contents as a simulated execution output. The full interpreter and REPL are implemented in src/main.c and provide the complete runtime environment and native modules.

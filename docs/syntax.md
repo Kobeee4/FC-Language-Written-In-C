@@ -1,14 +1,12 @@
 # Syntax Reference — FCL (FuseCore Language)
 
-This is a short, practical syntax guide for FCL so you can read and write small programs quickly.
-
 File extension: .fc
 
 Comments
 - Full-line comments begin with a plus and a space: `+ this is a comment`
 
 Indentation and blocks
-- Blocks are defined by indentation (similar to Python). The lexer emits INDENT and DEDENT tokens.
+- Blocks are defined by indentation. The lexer emits INDENT and DEDENT tokens.
 - Use consistent indentation (4 spaces conventional). Mismatched indentation is a syntax error.
 
 Primitives
@@ -23,6 +21,8 @@ Variables and declarations
 
 Control flow
 - If/elif/else
+  Example:
+  ```
   func example(x)
       if x > 0
           out "positive"
@@ -30,26 +30,25 @@ Control flow
           out "zero"
       else
           out "negative"
+  ```
 
-- Loops
-  - `loop` with `times` for simple counted loops
-  - `while`, `for`, `break`, `continue`
+- Loops: `loop`, `times`, `while`, `for`, `break`, `continue`
 
 Functions and lambdas
 - Define: `func name(param1, param2)` followed by an indented block
 - Return with `return`
-- Lambdas and higher-order functions available via `fn.*` helpers
+- Higher-order functions available via `fn.*` helpers
 
 Data structures
 - Lists: `[1, 2, 3]`
 - Dicts: `{ "key": "value" }`
 
 I/O and modules
-- Print: `out "text"` or use `print(...)` depending on demo style
-- Import native modules are available as global names (e.g. `ai`, `nn`, `math`, `file`, `web`)
-  - Example: `let m = ai.matrix(2, 2)`
+- Print: `out "text"` or use module functions as demonstrated in demos
+- Native modules are available by name (for example `ai`, `nn`, `math`, `file`, `web`)
 
 Example program
+
 ```
 + simple example
 let x = 10
@@ -58,6 +57,5 @@ func inc(v)
 out inc(x)
 ```
 
-Notes
-- See `src/README.txt` for a longer language overview and module documentation.
-- The interpreter and REPL are in `src/main.c`; run scripts with `./bin/fcl script.fc` or `./src/fc script.fc` depending on your build method.
+Reference
+- For a longer language overview and module documentation see `src/README.txt`.

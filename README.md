@@ -1,121 +1,88 @@
 # FCL (FuseCore Language) - written in C
 
-A small but real programming language implementation written in C. This repo contains a working lexer, parser, interpreter, and a set of native modules (including AI and neural-network helpers). I maintain this project solo from my phone as a mobile developer.
+A small but real programming language implementation written in C. This repository contains a working lexer, parser, interpreter, and a set of native modules, including AI and neural-network helpers. The project is maintained solo by the author, who develops primarily from a mobile device.
 
 Author: Kobeee4 (solo mobile developer)
 
 Overview
 
-FCL (FuseCore Language) is an experimental, lightweight language implemented in C. It is intended for learning, experimentation, and quick demos. The project already contains the main pieces of a working interpreter: a lexer, a parser, an AST, a runtime/interpreter, and many native modules exposed to scripts.
+FCL (FuseCore Language) is an experimental, lightweight language implemented in C. It is intended for learning, experimentation, and quick demos. The repository includes a lexer, a parser, an AST, a runtime/interpreter, and a collection of native modules exposed to scripts.
 
-What is in the repo (high level)
+Repository contents (high level)
 
-- Working lexer: src/lexer.c, src/lexer.h
-- Working parser: src/parser.c, src/parser.h
-- Interpreter and runtime: src/interpreter.c, src/main.c
-- Native modules and bindings: src/modules.c (includes ai and nn modules for matrix ops and neural helpers)
-- Demos and scripts: src/fcdemo (math.ai demo), src/update (small example and a stub runtime I added for quick checks)
-- Two Makefiles:
-  - top-level Makefile I added to produce bin/fcl for an easy demo build
-  - src/Makefile which builds the original "fc" interpreter (used by the original project structure)
+- src/: core interpreter sources (lexer, parser, interpreter, modules, demos)
+- docs/: user and developer-oriented documentation
+- bin/: produced by the top-level Makefile (convenience executable at bin/fcl)
+- LICENSE: MIT license
 
-Notable built-in modules
+Key components
 
-- ai: matrix, dot, add, transpose, train_linear, predict, randn, shape, apply
-- nn: sigmoid, relu, tanh, softmax, and derivative helpers
-- math, crypto, sec (security), web, file, random, os, and more
+- Lexer: src/lexer.c, src/lexer.h
+- Parser: src/parser.c, src/parser.h
+- Interpreter and REPL: src/interpreter.c, src/main.c
+- Native modules: src/modules.c (ai, nn, math, crypto, web, file, os, random, sec, etc.)
+- Demos and scripts: src/fcdemo (including math.ai demo) and src/update (small example and a stub runtime)
 
-There are demo scripts showing AI and tiny neural forward passes in src/fcdemo/math.fc
+Build and run
 
-Build options
+Two build options are available depending on how you prefer to work.
 
-You can build the project in two ways depending on what you want to run.
+1) Top-level convenience build (produces ./bin/fcl)
 
-1) Use the top-level Makefile (easy demo build, produces bin/fcl)
+From the repository root:
 
-   From the repository root:
+```sh
+make
+```
 
-   ```sh
-   make
-   ```
+Then run a script with:
 
-   The top-level Makefile compiles C sources (from src) into object files and links an executable at ./bin/fcl.
+```sh
+./bin/fcl path/to/script.fc
+```
 
-2) Use the original src/Makefile (the classic fc build)
+2) Original src layout build (produces ./src/fc)
 
-   ```sh
-   cd src
-   make
-   ```
+```sh
+cd src
+make
+./fc path/to/script.fc
+```
 
-   This produces the `fc` binary in the src directory (the old project layout). You can also build with:
+Examples
 
-   ```sh
-   cc -O2 -std=gnu11 -o fc main.c lexer.c parser.c interpreter.c modules.c others.c -lm
-   ```
+- AI + NN demo (matrix ops and tiny neural forward pass):
 
-Running programs
+```sh
+./bin/fcl src/fcdemo/math.fc
+```
 
-- Run the full interpreter (recommended for demos and real scripts):
+- Quick example (stub runtime that prints the file contents):
 
-  - If you used the top-level Makefile:
+```sh
+./bin/fcl src/update/example.fc
+```
 
-    ```sh
-    ./bin/fcl path/to/script.fc
-    ```
+Mobile / Termux notes
 
-  - If you built with src/Makefile inside src/:
+Termux provides a usable environment to build and run the interpreter on Android devices. Build inside Termux's home directory ($HOME) to avoid execution restrictions on external storage.
 
-    ```sh
-    ./fc path/to/script.fc
-    ```
+Quick Termux commands:
 
-- Demos:
+```sh
+pkg update && pkg upgrade
+pkg install clang make
+cd ~/path/to/FC-Language-Written-In-C/src
+make
+./fc src/fcdemo/math.fc
+```
 
-  - AI + NN demo (matrix ops and tiny neural forward pass):
+Contributing and reporting issues
 
-    ```sh
-    ./bin/fcl src/fcdemo/math.fc
-    ```
-
-  - Quick example I added (a small stub runtime that prints the file):
-
-    ```sh
-    ./bin/fcl src/update/example.fc
-    ```
-
-Notes about the stub in src/update
-
-I added a minimal stub runtime in src/update/main.c to make a very low-friction smoke test and an example file at src/update/example.fc. The real interpreter in src/main.c is the full runtime and already supports the ai and nn modules; use that for real testing and demos.
-
-Mobile/Termux notes
-
-You mentioned you work from a phone. Good news: the project includes notes and has been developed with Termux in mind. See src/README.txt for detailed Termux instructions. Quick summary:
-
-- Install Termux (F-Droid recommended) and packages: clang, make
-- Build inside Termux's $HOME (do not build on /sdcard because of noexec)
-- Example Termux commands:
-
-  ```sh
-  pkg update && pkg upgrade
-  pkg install clang make
-  cd ~/path/to/FC-Language-Written-In-C/src
-  make
-  ./fc src/fcdemo/math.fc
-  ```
-
-How to help or contribute
-
-I maintain this solo from my phone, so small changes are best. If you want to contribute:
-
-- Open small, focused pull requests
-- Add examples or small modules (follow Module guide in src/Module guide.txt)
-- File issues for bugs or feature requests
-
-If you want, I can add CONTRIBUTING and ISSUE templates to make this easier for you and others.
+- Open issues for bugs or feature requests.
+- Create small, focused pull requests for contributions.
+- See src/Module guide.txt for instructions on adding native modules.
 
 License
 
-This project is licensed under the MIT License. See LICENSE for details.
-
-Thank you
+This project is published under the MIT License. See LICENSE for full details.

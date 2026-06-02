@@ -2,6 +2,8 @@
 
 FCL includes helpers for matrix arithmetic and neural-network utilities. These functions are implemented as native modules in C and operate on the interpreter's list-of-list structures.
 
+### Note:
+You can write a custom module/package with proper AI stuff. 
 Provided modules
 
 - ai: matrix and numeric helpers

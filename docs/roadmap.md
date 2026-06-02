@@ -1,4 +1,4 @@
-# Roadmap — FCL (short, practical)
+# Roadmap — FCL
 
 This is a focused roadmap with small, actionable items you or contributors can pick up. I kept it lightweight because you maintain this solo from a phone.
 
@@ -26,5 +26,3 @@ Contributor-friendly tasks
 Notes about maintenance
 - Keep changes small and self-contained so you can review them easily on mobile
 - Tag releases with short notes to make demo builds reproducible
-
-If you want, I can start with the short-term tasks now: add CONTRIBUTING.md, add a GitHub Actions workflow that runs make, and implement the stub print execution. Say which two or three you want first and I will add them.

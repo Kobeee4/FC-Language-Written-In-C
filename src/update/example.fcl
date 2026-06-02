@@ -1,0 +1,5 @@
+# Example FCL program
+
+# This is a small placeholder example. The FCL runtime in this repo is a stub and will print the file contents.
+
+print("Hello, FCL!")

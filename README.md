@@ -61,6 +61,24 @@ Usage depends on the current build output. Typical steps:
 
 If you want, I can add a concrete example and a sample FCL program once you tell me how you prefer to run it.
 
+### Quick example (added)
+
+This repository now includes a small example runtime stub and a sample program in `src/update` so you can build and try the project immediately.
+
+1. Build the project:
+
+   ```
+   make
+   ```
+
+2. Run the example program:
+
+   ```
+   ./bin/fcl src/update/example.fcl
+   ```
+
+   The runtime is a minimal stub that prints the contents of the file and simulates execution. This is meant to be a low-friction way to verify the build and iterate on language features.
+
 ## How to help
 
 I am a solo maintainer. If you want to help:

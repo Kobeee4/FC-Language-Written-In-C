@@ -1,0 +1,25 @@
++ strutil.fc - an example custom FC package
++ Import it with:  import strutil   (FC searches ./, ./packages/, ~/.fc/packages/)
+
+func repeat_str(text, n)
+    let acc = ""
+    let i = 0
+    while i < n
+        acc += text
+        i += 1
+    return acc
+
+func title_case(text)
+    let parts = text.split(" ")
+    let result = []
+    for w in parts
+        if w.length() > 0
+            result.append(w.substr(0, 1).upper() + w.substr(1, w.length() - 1))
+        else
+            result.append(w)
+    return result.join(" ")
+
+func reverse_words(text)
+    return reversed(text.split(" ")).join(" ")
+
+let STRUTIL_VERSION = "1.0"

@@ -1,0 +1,55 @@
++ strings.fc - extra string helpers
++ import strings
+
+func pad_left(text, width, fill)
+    let s = text
+    while s.length() < width
+        s = fill + s
+    return s
+
+func pad_right(text, width, fill)
+    let s = text
+    while s.length() < width
+        s = s + fill
+    return s
+
+func capitalize(text)
+    if text.length() == 0
+        return text
+    return text.substr(0, 1).upper() + text.substr(1, text.length() - 1)
+
+func snake_case(text)
+    return text.lower().trim().replace(" ", "_")
+
+func kebab_case(text)
+    return text.lower().trim().replace(" ", "-")
+
+func camel_case(text)
+    let parts = text.split(" ")
+    let result = ""
+    let first = true
+    for w in parts
+        if w.length() == 0
+            continue
+        if first
+            result = result + w.lower()
+            first = false
+        else
+            result = result + capitalize(w.lower())
+    return result
+
+func count_char(text, ch)
+    let n = 0
+    for c in text
+        if c == ch
+            n += 1
+    return n
+
+func is_palindrome(text)
+    let clean = text.lower().replace(" ", "")
+    return clean == reversed(clean)
+
+func truncate(text, width)
+    if text.length() <= width
+        return text
+    return text.substr(0, width - 3) + "..."

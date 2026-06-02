@@ -74,7 +74,7 @@ This repository now includes a small example runtime stub and a sample program i
 2. Run the example program:
 
    ```
-   ./bin/fcl src/update/example.fcl
+   ./bin/fcl src/update/example.fc
    ```
 
    The runtime is a minimal stub that prints the contents of the file and simulates execution. This is meant to be a low-friction way to verify the build and iterate on language features.

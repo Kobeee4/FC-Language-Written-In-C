@@ -1,0 +1,84 @@
+func esc(text)
+    return web.html_escape(str(text))
+
+func attrs_str(attrs)
+    if attrs == null
+        return ""
+    let res = ""
+    for k in attrs
+        res = res + " " + k + "=\"" + web.html_escape(str(attrs[k])) + "\""
+    return res
+
+func el(tag, attrs, body)
+    let inner = ""
+    if not (body == null)
+        inner = str(body)
+    return "<" + tag + attrs_str(attrs) + ">" + inner + "</" + tag + ">"
+
+func voidel(tag, attrs)
+    return "<" + tag + attrs_str(attrs) + ">"
+
+func h(level, text)
+    return el("h" + str(level), null, esc(text))
+
+func para(text)
+    return el("p", null, esc(text))
+
+func link(href, text)
+    return el("a", {"href": href}, esc(text))
+
+func ul_of(items)
+    let body = ""
+    for x in items
+        body = body + el("li", null, esc(x))
+    return el("ul", null, body)
+
+func ol_of(items)
+    let body = ""
+    for x in items
+        body = body + el("li", null, esc(x))
+    return el("ol", null, body)
+
+func table_of(headers, rows)
+    let head = ""
+    for hcell in headers
+        head = head + el("th", null, esc(hcell))
+    let thead = el("tr", null, head)
+    let body = ""
+    for row in rows
+        let cells = ""
+        for cell in row
+            cells = cells + el("td", null, esc(cell))
+        body = body + el("tr", null, cells)
+    return el("table", null, thead + body)
+
+func form(action, method, body)
+    return el("form", {"action": action, "method": method}, body)
+
+func field(label, name, value)
+    let v = value
+    if v == null
+        v = ""
+    let lab = el("label", null, esc(label) + " ")
+    let inp = voidel("input", {"name": name, "value": v})
+    return el("div", {"class": "field"}, lab + inp)
+
+func button(text)
+    return el("button", {"type": "submit"}, esc(text))
+
+func nav_of(links)
+    let body = ""
+    for pair in links
+        body = body + link(pair[0], pair[1]) + " "
+    return el("nav", null, body)
+
+func badge(text)
+    return el("span", {"class": "badge"}, esc(text))
+
+func card(title, body)
+    return el("div", {"class": "card"}, el("h2", null, esc(title)) + body)
+
+func page(title, body)
+    let style = "body{font-family:system-ui,-apple-system,sans-serif;max-width:760px;margin:24px auto;padding:0 16px;line-height:1.55;color:#1a1a2e;background:#f5f5fb}h1,h2,h3{color:#3a2bd6}nav{margin:10px 0 18px}nav a{margin-right:12px;font-weight:600}table{border-collapse:collapse;margin:8px 0}td,th{border:1px solid #ccd;padding:5px 12px;text-align:left}input{padding:5px;border:1px solid #bbc;border-radius:6px}textarea{width:100%;min-height:120px;padding:8px;border:1px solid #bbc;border-radius:6px}button{padding:6px 14px;background:#3a2bd6;color:#fff;border:0;border-radius:7px;cursor:pointer;font-weight:600}.field{margin:8px 0}.card{background:#fff;border:1px solid #e0e0ee;border-radius:12px;padding:16px 20px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,0.05)}.badge{display:inline-block;background:#3a2bd6;color:#fff;border-radius:20px;padding:2px 12px;font-size:13px}a{color:#3a2bd6}code{background:#ececf6;padding:1px 5px;border-radius:4px}pre{background:#1a1a2e;color:#eee;padding:12px;border-radius:8px;overflow:auto}"
+    let head = "<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>" + esc(title) + "</title><style>" + style + "</style></head>"
+    return "<!DOCTYPE html><html>" + head + el("body", null, body) + "</html>"

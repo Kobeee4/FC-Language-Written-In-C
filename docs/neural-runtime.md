@@ -40,5 +40,3 @@ Possible improvements
 - Add matrix memory layout optimizations or an FFI to link with a native BLAS / vector library
 - Implement batch operations and a small autodiff engine for training
 - Provide more examples and unit tests for numeric stability
-
-If you want I can add a dedicated demo that shows training a small dataset end-to-end and saves results to src/fcdemo/ai_train_demo.fc.

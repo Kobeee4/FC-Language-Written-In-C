@@ -1,0 +1,32 @@
++ testing.fc - a minimal unit-test framework
++ import testing
++ usage:
++     check_eq("adds", 2 + 2, 4)
++     check("is big", 10 > 5)
++     test_summary()
+
+let _TEST_PASS = 0
+let _TEST_FAIL = 0
+
+func check(name, condition)
+    if condition
+        _TEST_PASS += 1
+        out "  [PASS] " + name
+    else
+        _TEST_FAIL += 1
+        out "  [FAIL] " + name
+
+func check_eq(name, got, expected)
+    if got == expected
+        _TEST_PASS += 1
+        out "  [PASS] " + name
+    else
+        _TEST_FAIL += 1
+        out "  [FAIL] " + name + "  (got " + got + ", expected " + expected + ")"
+
+func test_summary()
+    out "--------------------------------"
+    out "  passed: " + _TEST_PASS + "   failed: " + _TEST_FAIL
+    if _TEST_FAIL == 0
+        out "  ALL TESTS PASSED"
+    return _TEST_FAIL

@@ -1,4 +1,4 @@
-# Roadmap — FCL (concise)
+# Roadmap — FCL
 
 A short, practical roadmap with actionable items.
 

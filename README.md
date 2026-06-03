@@ -14,6 +14,7 @@ A small but real programming language implementation written in C. This reposito
 
 Author: Kobeee4
 
+## Note, This MD was created by AI. 
 Overview
 
 FCL (FuseCore Language) is an experimental, lightweight language implemented in C. It is intended for learning, experimentation, and quick demos. The repository includes a lexer, a parser, an AST, a runtime/interpreter, and a collection of native modules exposed to scripts.

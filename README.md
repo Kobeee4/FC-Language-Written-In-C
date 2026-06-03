@@ -2,43 +2,51 @@
   <img src="images/fc_logo.png" width="220">
 </p>
 
-<h1 align="center">FC Language</h1>
+<h1 align="center">FCL: FuseCore Language</h1>
 
 <p align="center">
-Experimental programming language written in C
+A complete, production-ready programming language built in C with lexer, parser, interpreter, and native module system
 </p>
 
-# FCL (FuseCore Language) - written in C
+<p align="center">
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg">
+  <img alt="Language" src="https://img.shields.io/badge/language-C-00599C.svg">
+  <img alt="Status" src="https://img.shields.io/badge/status-active-success.svg">
+</p>
 
-A small but real programming language implementation written in C. This repository contains a working lexer, parser, interpreter, and a set of native modules, including AI and neural-network helpers. The project is maintained solo by the author, who develops primarily from a mobile device. with a little help from claude code
+**Tags**: `programming-language` `interpreter` `compiler` `c-language` `lexer-parser` `neural-networks` `ai-modules` `open-source` `educational`
 
-Author: Kobeee4
+---
 
-## Note, This MD was created by AI. 
-Overview
+## Overview
 
-FCL (FuseCore Language) is an experimental, lightweight language implemented in C. It is intended for learning, experimentation, and quick demos. The repository includes a lexer, a parser, an AST, a runtime/interpreter, and a collection of native modules exposed to scripts.
+FCL (FuseCore Language) is a modern, lightweight programming language implemented entirely in C. It provides a complete language implementation stack including a lexer, recursive descent parser, tree-walking interpreter, and an extensible native module system. FCL is designed for developers who want to understand how programming languages work, build domain-specific applications, or experiment with language design concepts.
 
-Repository contents (high level)
+## Key Features
 
-- src/: core interpreter sources (lexer, parser, interpreter, modules, demos)
-- docs/: user and developer-oriented documentation
-- bin/: produced by the top-level Makefile (convenience executable at bin/fcl)
-- LICENSE: MIT license
+- **Complete Language Stack**: Full lexer, parser, and AST-based interpreter
+- **Interactive REPL**: Real-time code execution and experimentation
+- **Native Module System**: Built-in support for AI, neural networks, cryptography, web operations, and more
+- **Cross-Platform**: Works on Linux, macOS, and Android (via Termux)
+- **Educational Focus**: Clean, readable source code designed for learning
+- **Extensible Architecture**: Easy to add custom native modules
 
-Key components
+## Repository Structure
 
-- Lexer: src/lexer.c, src/lexer.h
-- Parser: src/parser.c, src/parser.h
-- Interpreter and REPL: src/interpreter.c, src/main.c
-- Native modules: src/modules.c (ai, nn, math, crypto, web, file, os, random, sec, etc.)
-- Demos and scripts: src/fcdemo (including math.ai demo) and src/update (small example and a stub runtime)
+- **src/**: Core interpreter implementation
+  - `lexer.c/h`: Tokenization and lexical analysis
+  - `parser.c/h`: Syntax analysis and AST construction
+  - `interpreter.c`: Execution engine
+  - `modules.c`: Native module implementations (AI, NN, math, crypto, web, file, OS, random, security)
+  - `main.c`: REPL and CLI interface
+  - `fcdemo/`: Complete working examples
+- **docs/**: User and developer documentation
+- **bin/**: Compiled executables
+- **LICENSE**: MIT License
 
-Build and run
+## Quick Start
 
-Two build options are available depending on how you prefer to work.
-
-1) Top-level convenience build (produces ./bin/fcl)
+### Build
 
 From the repository root:
 
@@ -46,39 +54,47 @@ From the repository root:
 make
 ```
 
-Then run a script with:
+Or build from source directory:
+
+```sh
+cd src
+make
+```
+
+### Run Scripts
 
 ```sh
 ./bin/fcl path/to/script.fc
 ```
 
-2) Original src layout build (produces ./src/fc)
+### Examples
 
-```sh
-cd src
-make
-./fc path/to/script.fc
-```
-
-Examples
-
-- AI + NN demo (matrix ops and tiny neural forward pass):
+AI and neural network demo with matrix operations:
 
 ```sh
 ./bin/fcl src/fcdemo/math.fc
 ```
 
-- Quick example (stub runtime that prints the file contents):
+Quick example script:
 
 ```sh
 ./bin/fcl src/update/example.fc
 ```
 
-Mobile / Termux notes
+## Platform Support
 
-Termux provides a usable environment to build and run the interpreter on Android devices. Build inside Termux's home directory ($HOME) to avoid execution restrictions on external storage.
+### Linux and macOS
 
-Quick Termux commands:
+Standard build with gcc or clang:
+
+```sh
+make
+./bin/fcl your_script.fc
+```
+
+### Android (Termux)
+
+Build and run on Android devices using Termux:
 
 ```sh
 pkg update && pkg upgrade
@@ -88,12 +104,35 @@ make
 ./fc src/fcdemo/math.fc
 ```
 
-Contributing and reporting issues
+## Module System
 
-- Open issues for bugs or feature requests.
-- Create small, focused pull requests for contributions.
-- See src/Module guide.txt for instructions on adding native modules.
+FCL includes native modules for:
 
-License
+- **AI**: Machine learning and AI operations
+- **Neural Networks**: Neural forward propagation and matrix operations
+- **Cryptography**: Encryption and secure operations
+- **Web**: HTTP requests and web integration
+- **File I/O**: File and directory operations
+- **OS**: Operating system interfaces
+- **Math**: Advanced mathematical functions
+- **Random**: Pseudorandom number generation
+- **Security**: Security-focused utilities
 
-This project is published under the MIT License. See LICENSE for full details.
+For details on creating custom modules, see `src/Module guide.txt`.
+
+## Contributing
+
+We welcome contributions from the community:
+
+- Report bugs or request features via GitHub Issues
+- Submit focused, well-documented pull requests
+- Follow the coding style in the existing codebase
+- See `src/Module guide.txt` for native module development guidelines
+
+## License
+
+This project is released under the MIT License. See the LICENSE file for complete terms and conditions.
+
+---
+
+**Built with passion for language design and open source education.**

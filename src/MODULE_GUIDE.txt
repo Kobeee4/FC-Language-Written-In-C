@@ -1,0 +1,104 @@
+===========================================================================
+ HOW TO WRITE A NATIVE C MODULE FOR FC
+===========================================================================
+
+A native module is plain C compiled into the FC binary. The complete,
+working example is stats_module.c (it adds the `stats` module). Use it as a
+template. Here is the whole recipe in 4 steps.
+
+---------------------------------------------------------------------------
+ STEP 1 - Write each function with the native signature
+---------------------------------------------------------------------------
+Every FC-callable function is a C function shaped exactly like this:
+
+    Value my_func(Interp* I, Value self, int argc, Value* argv)
+
+    I     interpreter handle (use it to raise errors)
+    self  the receiver, only used by methods -- ignore with (void)self;
+    argc  how many arguments the script passed
+    argv  the arguments, already evaluated, as Value structs
+    ->    return a Value (the result given back to the script)
+
+Reading arguments:
+    argv[0].type        one of VAL_NUMBER, VAL_STRING, VAL_LIST, VAL_DICT,
+                        VAL_BOOL, VAL_NULL, ...
+    argv[0].as.number   the double, when type == VAL_NUMBER
+    argv[0].as.str->chars / ->length      a string
+    argv[0].as.list->items / ->count      a list of Values
+
+Returning values (constructors from interpreter.h):
+    NUMBER_VAL(3.14)        BOOL_VAL(1)         NULL_VAL()
+    make_string_cstr("hi")  make_list()         make_dict()
+    For lists/dicts you build:
+        list_append_take(mylist.as.list, NUMBER_VAL(1));
+        dict_set_take(mydict.as.dict, "key", make_string_cstr("v"));
+
+Raising errors (never crashes the interpreter, fully catchable with try):
+    interp_error(I, 0, "my_func: something is wrong: %s", detail);
+    interp_error never returns -- it unwinds to the nearest try/catch.
+
+Memory: arguments are owned by the caller (do not release argv). Values you
+build and return are owned by the interpreter. The *_take helpers transfer
+ownership into the list/dict for you.
+
+---------------------------------------------------------------------------
+ STEP 2 - Register the functions as a module
+---------------------------------------------------------------------------
+A module is a dict of name -> native function, stored as a global. Provide
+ONE public function that builds it:
+
+    void register_mymod(Interp* I) {
+        Value mod = make_dict();
+        dict_set_take(mod.as.dict, "hello",
+                      make_native(my_func, NULL_VAL(), "hello"));
+        /* add more functions ... */
+        env_define(I->globals, "mymod", mod);   /* the module's FC name */
+        value_release(mod);                      /* env_define keeps a ref */
+    }
+
+After this, scripts call:  mymod.hello(...)
+
+---------------------------------------------------------------------------
+ STEP 3 - Hook it into startup
+---------------------------------------------------------------------------
+Open modules.c and:
+
+  a) near the top (after define_module) add the prototype:
+         void register_mymod(Interp* I);
+
+  b) at the very end of register_modules(), add the call:
+         register_mymod(I);
+
+(That is exactly how stats_module.c is wired in -- search modules.c for
+register_stats to see both lines.)
+
+---------------------------------------------------------------------------
+ STEP 4 - Add the file to the build
+---------------------------------------------------------------------------
+Edit the Makefile and append your file to SRCS:
+
+    SRCS = main.c lexer.c parser.c interpreter.c modules.c others.c \
+           stats_module.c mymod.c
+
+Then:
+
+    make clean && make
+    ./fc yourscript.fc
+
+That's it. The same steps work in the FCdependency build too (copy your
+.c file there and add it to that Makefile's SRCS as well).
+
+---------------------------------------------------------------------------
+ QUICK CHECKLIST
+---------------------------------------------------------------------------
+  [ ] functions use  Value f(Interp*, Value, int, Value*)
+  [ ] validate argc/types, call interp_error on bad input
+  [ ] build a dict with make_native(...) entries
+  [ ] env_define(I->globals, "name", mod); value_release(mod);
+  [ ] prototype + call added in modules.c register_modules()
+  [ ] file added to Makefile SRCS
+  [ ] make clean && make
+
+See stats_module.c and stats_demo.fc for the full,
+working example.
+===========================================================================

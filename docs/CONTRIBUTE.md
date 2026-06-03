@@ -2,7 +2,7 @@
 
 Thanks for helping improve FC Language (FCL)! 
 Quick ways to contribute
-- Join the Discord server: https://discord.gg/pP9Ur2FnRA — share patches, share pckages/modukes, ask for reviews, or request help.  
+- Join the Discord server: https://discord.gg/pP9Ur2FnRA — share patches, share packages/modules, ask for reviews, or request help.  
 - Fork the repo, make changes, push to your fork, and open a Pull Request against the main branch.
 
 What we accept
